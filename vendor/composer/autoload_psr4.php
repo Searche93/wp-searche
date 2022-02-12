@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Theme\\' => array($baseDir . '/admin/classes'),
+    'Searche\\' => array($baseDir . '/admin'),
 );

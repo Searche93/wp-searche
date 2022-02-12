@@ -1,7 +1,7 @@
 <?php
 
-use Theme\ThemeTemplates;
-use Theme\ThemeColors;
+use Searche\Classes\ThemeTemplates;
+use Searche\Classes\ThemeColors;
 
 ?>
 

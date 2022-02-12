@@ -5,7 +5,7 @@
  * If there is no header file found, this file will be called.
  */
 
-use Theme\Theme;
+use Searche\Classes\Theme;
 
 ?>
 <header>

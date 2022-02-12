@@ -1,6 +1,6 @@
 <?php
 
-use Theme\Theme;
+use Searche\Classes\Theme;
 
 ?>
 <footer class="footer-bg-color color-white">

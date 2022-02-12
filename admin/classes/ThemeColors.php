@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Theme;
-
+namespace Searche\Classes;
 
 class ThemeColors extends Theme
 {

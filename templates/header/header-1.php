@@ -1,6 +1,6 @@
 <?php
 
-use Theme\Theme;
+use Searche\Classes\Theme;
 
 ?>
 <header id="header-1" class="header-bg-color">

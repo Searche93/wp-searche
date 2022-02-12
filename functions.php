@@ -2,8 +2,10 @@
 
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
-use Theme\Theme;
+use Searche\Classes\Theme;
+
 $theme = new Theme;
+
 
 
 /**
@@ -134,5 +136,16 @@ function remove_gutenberg_widget_area()
 {
     remove_theme_support( 'widgets-block-editor' );
 }
-add_action( 'after_setup_theme', 'remove_gutenberg_widget_area' );
-add_filter( 'use_widgets_block_editor', '__return_false' );
+add_action('after_setup_theme','remove_gutenberg_widget_area');
+add_filter('use_widgets_block_editor','__return_false');
+
+
+
+function custom_upload_filter($file)
+{
+    //$source = $file['name'];
+    //$destination = $file['name'].'.webp';
+    //$options = [];
+    //WebPConvert::convert($source, $destination, $options);
+}
+add_filter('wp_handle_upload_prefilter','custom_upload_filter');

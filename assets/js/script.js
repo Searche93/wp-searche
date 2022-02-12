@@ -16,7 +16,6 @@ if(mainMenu) {
 
     function get_mobile_menu()
     {
-        console.log(window.innerWidth);
         if (window.innerWidth <= 820) {
             mainMenu.classList.add('mobile-menu');
             openMenu.style.display = 'block';

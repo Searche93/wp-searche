@@ -53,6 +53,7 @@ h2, h3, h4, h5, h6 {padding: .5em 0;}
 .bg-light-grey {background-color: #f1f1f1;}
 .bg-dark-grey {background-color: #252525;}
 .bg-black {background-color: #000;}
+.bg-trans {background-color: rgba(0,0,0,0.0)}
 
 .color-white {color: #fff;}
 .color-light-grey {color: #f1f1f1;}

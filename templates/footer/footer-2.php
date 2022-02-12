@@ -1,7 +1,7 @@
 <?php
 
-use Theme\Theme;
-use Theme\ThemeSocials;
+use Searche\Classes\Theme;
+use Searche\Classes\ThemeSocials;
 
 ?>
 <footer class="footer-bg-color color-white">

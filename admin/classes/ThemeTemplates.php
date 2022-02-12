@@ -1,6 +1,6 @@
 <?php
 
-namespace Theme;
+namespace Searche\Classes;
 
 class ThemeTemplates extends Theme
 {

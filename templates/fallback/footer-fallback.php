@@ -5,7 +5,7 @@
  * If there is no footer file found, this file will be called.
  */
 
-use Theme\Theme;
+use Searche\Classes\Theme;
 
 ?>
 <footer class="footer-bg-color color-white">
