@@ -7,5 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Searche\\Classes\\Theme' => $baseDir . '/admin/Classes/Theme.php',
 );

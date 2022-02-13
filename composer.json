@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "rosell-dk/webp-convert": "^2.9"
   },
   "autoload": {
     "psr-4": {

@@ -3,9 +3,8 @@
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
 use Searche\Classes\Theme;
-
+use WebPConvert\WebPConvert;
 $theme = new Theme;
-
 
 
 /**
@@ -140,12 +139,18 @@ add_action('after_setup_theme','remove_gutenberg_widget_area');
 add_filter('use_widgets_block_editor','__return_false');
 
 
-
-function custom_upload_filter($file)
+/**
+ * On upload image add a webp version of that image.
+ * This function will increase pagespeed.
+ *
+ * @param $attachment_id
+ * @throws \WebPConvert\Convert\Exceptions\ConversionFailedException
+ */
+function add_webp_image( $attachment_id )
 {
-    //$source = $file['name'];
-    //$destination = $file['name'].'.webp';
-    //$options = [];
-    //WebPConvert::convert($source, $destination, $options);
+    $source = get_attached_file($attachment_id);;
+    $destination = $source.'.webp';
+    $options = [];
+    WebPConvert::convert($source, $destination, $options);
 }
-add_filter('wp_handle_upload_prefilter','custom_upload_filter');
+add_action( 'add_attachment', 'add_webp_image' );
