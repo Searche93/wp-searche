@@ -3,16 +3,16 @@
     Author: Serge Zant
     Description: Lightweight Wordpress Theme
     Version: 1.0.0
-    Text Domain: my-custom-theme
+    Text Domain: wp-theme
     Tags: Lightweight
  */
 
 /* Reset */
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
-
 /* Start Custom */
 * {box-sizing: border-box; text-decoration: none;}
+html{scroll-behavior: smooth;}
 body {font-family: 'Roboto', sans-serif;}
 header, main, aside {position: relative}
 img {max-width: 100%; height: auto;}
@@ -34,8 +34,6 @@ img {max-width: 100%; height: auto;}
 .f-grow-1 {flex-grow: 1;}
 .flex-dir-col {flex-direction: column;}
 
-
-
 /* Headings, paragraphs and font sizes */
 h1, .h1 {font-size: 2.2em;}
 h2, .h2 {font-size: 1.8em;}
@@ -47,6 +45,8 @@ p {font-size: 1em; padding-bottom: 1em; line-height: 1.4em;}
 h2, h3, h4, h5, h6 {padding: .5em 0;}
 .fs-smaller{font-size: .5em;}
 .fs-small{font-size: .75em;}
+.bold {font-weight: bold;}
+.italic {font-style: italic;}
 
 /* Backgrounds and colors */
 .bg-white {background-color: #fff;}
@@ -94,7 +94,7 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
 /* Overflows */
 .overflow-auto{overflow: auto;}
 .overflow-hide{overflow: hidden;}
-
+.overflow-init{overflow: initial;}
 /* Positions */
 .pos-relative {position: relative;}
 .pos-absolute {position: absolute;}
@@ -103,7 +103,6 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
 .top-xs {top: .25em;}
 .top-sm {top: .5em;}
 .top-md {top: 1em;}
-.top-xl {top: 1.5em;}
 .top-lg {top: 2em;}
 .top-xl {top: 3em;}
 .top-init  {top: initial;}
@@ -134,6 +133,13 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
 .left-lg {left: 2em;}
 .left-xl {left: 3em;}
 .left-init  {left: initial;}
+
+/* Line heights */
+.lh-xs {line-height: .25em;}
+.lh-sm {line-height: .5em;}
+.lh-md {line-height: 1em;}
+.lh-lg {line-height: 1.5em;}
+.lh-xl {line-height: 3em;}
 
 /* Paddings */
 .p-xs {padding: .25em;}
@@ -215,6 +221,7 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
 .m-b-lg {margin-bottom: 1.5em;}
 .m-b-xl {margin-bottom: 3em;}
 
+.m-l-none {margin-left: 0;}
 .m-l-xs {margin-left: .25em;}
 .m-l-sm {margin-left: .5em;}
 .m-l-md {margin-left: 1em;}
@@ -265,14 +272,36 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
 .mn-l-xl {margin-left: -3em;}
 
 
-
-
-/* Responsive */
-/* Desktop */
-@media screen and (min-width: 1025px) {
-
+/* Menu */
+nav.menu ul li.has-children {
+    position: relative;
+}
+nav.menu ul li.has-children ul.submenu {
+    display: none;
+    position: absolute;
+    top: 3em;
+    left: 1em;
+}
+nav.menu ul li.has-children:hover > ul.submenu {
+    display: block;
 }
 
+/* Responsive */
+@media screen and (min-width: 820px) {
+    /* Submenu */
+    nav.menu ul li.has-children:hover > ul.submenu {
+        display: block;
+    }
+    nav.menu ul li.has-children:hover > ul.submenu li {
+        padding: .75em;
+    }
+    nav.menu ul li.has-children:hover > ul.submenu li a {
+        color: #fff;
+    }
+    nav.menu ul li.has-children:hover > ul.submenu li a:hover {
+        color: #525252;
+    }
+}
 /* iPad landscape */
 @media screen and (max-width: 1024px) {
     /* Columns */
@@ -302,6 +331,9 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
     /* Displays */
     .d-block-md {display: block;}
     .d-none-md {display: none;}
+
+    /* Padding reset */
+    .p-reset-md {padding: 0;}
 }
 
 /* iPad portrait */
@@ -326,12 +358,36 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
     .bottom-init-sm  {bottom: initial;}
     .left-init-sm  {left: initial;}
 
+    /* Overflows */
+    .overflow-auto-sm {overflow: auto;}
+
     /* Flex */
     .flex-dir-col-sm {flex-direction: column;}
 
     /* Displays */
     .d-none-sm {display: none;}
     .d-block-sm {display: block;}
+
+    /* Padding */
+    .p-y-md-sm {padding: 1em 0;}
+    .p-x-md-sm {padding: 0 1em;}
+    .p-t-md-sm {padding-top: 1em;}
+    .p-b-md-sm {padding-bottom: 1em;}
+    .p-l-md-sm {padding-left: 1em;}
+    .p-r-md-sm {padding-right: 1em;}
+    .p-reset-sm {padding: 0;}
+
+    .p-y-sm-sm {padding: .5em 0;}
+
+    /* Margins */
+    .m-y-md-sm {margin: 1em 0;}
+    .m-x-md-sm {margin: 0 1em;}
+    .m-t-md-sm {margin-top: 1em;}
+    .m-b-md-sm {margin-bottom: 1em;}
+    .m-l-md-sm {margin-left: 1em;}
+    .m-r-md-sm {margin-right: 1em;}
+    .m-reset-sm {margin: 0;}
+
 
     /* Mobile menu */
     .mobile-menu {
@@ -376,4 +432,7 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
     /* Displays */
     .d-block-xs {display: block;}
     .d-none-xs {display: none;}
+
+    /* Padding reset */
+    .p-reset-xs {padding: 0;}
 }
