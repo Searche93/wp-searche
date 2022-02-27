@@ -5,7 +5,7 @@ namespace Searche\Classes;
 class Theme
 {
 
-    public $themeSettings = [
+    public array $themeSettings = [
         // General
         'theme_logo',
         'theme_header_img',
@@ -38,7 +38,6 @@ class Theme
         'theme_pinterest',
     ];
 
-
     /**
      * Theme constructor
      */
@@ -49,8 +48,9 @@ class Theme
 
         add_action('admin_enqueue_scripts', array($this, 'add_admin_style'));
         add_action('admin_enqueue_scripts', array($this, 'add_admin_scripts'));
-    }
 
+        ThemeImages::register();
+    }
 
     /**
      * Get theme settings
@@ -62,7 +62,6 @@ class Theme
         return (array)$this->themeSettings;
     }
 
-
     /**
      * Create update theme settings
      */
@@ -73,7 +72,6 @@ class Theme
         }
     }
 
-
     /**
      * Add admin style css
      */
@@ -81,7 +79,6 @@ class Theme
     {
         wp_enqueue_style('admin-styles', get_template_directory_uri().'/admin/css/admin.css');
     }
-
 
     /**
      * Add admin script js
@@ -93,7 +90,6 @@ class Theme
         }
         wp_enqueue_script('admin-scripts', get_template_directory_uri().'/admin/js/admin.js');
     }
-
 
     /**
      * Add theme options menu item
@@ -111,7 +107,6 @@ class Theme
         );
     }
 
-
     /**
      * Add options page
      */
@@ -119,7 +114,6 @@ class Theme
     {
         include(get_template_directory() . '/admin/theme-options.php');
     }
-
 
     /**
      * Return a theme option value
@@ -132,41 +126,75 @@ class Theme
         return esc_attr(get_option($option));
     }
 
-
     /**
      * Get theme menu
      *
      * @param string $menuName
+     * @param bool $wrapper
+     * @param string $navClasses
      * @param string $listItemClasses
      * @param string $linkClasses
      * @return string
      */
-    public static function get_theme_menu(string $menuName = 'main-menu', bool $wrapper = false, string $navClasses = '', string $listItemClasses = '', string $linkClasses = ''): string
+    public static function get_theme_menu(string $menuName, bool $wrapper = false, string $navClasses = '', string $listItemClasses = '', string $linkClasses = ''): string
     {
-        $locations = get_nav_menu_locations();
-        $menu = isset($locations[$menuName]) ? wp_get_nav_menu_object($locations[$menuName]) : wp_get_nav_menu_object($locations['main-menu']);
-        $menuItems = wp_get_nav_menu_items($menu->term_id);
-
-        $menuList = '<nav id="menu-' . $menuName . '" class="'.$navClasses.'"><ul>';
+        $menu = self::build_menu($menuName);
+        $menuList = '<nav id="menu-' . $menuName . '" class="menu '.$navClasses.'"><ul>';
         if($wrapper) {
             $menuList .= '<div class="wrapper">';
         }
-        foreach ($menuItems as $menuItem) {
-            $menuList .= '<li class="'.$listItemClasses.'">
-        <a class="'.$linkClasses.'" href="' . $menuItem->url . '">' . $menuItem->title . '</a>
-        </li>';
+        foreach ($menu as $item) {
+            $itemWithChildren = !empty($item['children']) ? ' has-children' : '';
+
+            $menuList .= '<li class="'.$listItemClasses. $itemWithChildren.'">';
+            $menuList .= '<a class="'.$linkClasses.'" href="' . $item['url'] . '">' . $item['title'] . '</a>';
+            if(!empty($item['children'])) {
+                $menuList .= '<ul class="submenu">';
+                foreach ($item['children'] as $child) {
+                    $menuList .= '<li><a href="'.$child['url'].'">'. $child['title'] . '</a></li>';
+                }
+                $menuList .= '</ul>';
+            }
+            $menuList .='</li>';
         }
         if($wrapper) {
             $menuList .= '</div>';
         }
         $menuList .= '</ul></nav>';
-
         return $menuList;
     }
 
-
-
-
+    /**
+     * Return array of menu
+     *
+     * @param string $menuName
+     * @return array
+     */
+    public static function build_menu(string $menuName): array
+    {
+        $array_menu = wp_get_nav_menu_items($menuName);
+        $menu = array();
+        foreach ($array_menu as $m) {
+            if (empty($m->menu_item_parent)) {
+                $menu[$m->ID] = array();
+                $menu[$m->ID]['ID']      =   $m->ID;
+                $menu[$m->ID]['title']       =   $m->title;
+                $menu[$m->ID]['url']         =   $m->url;
+                $menu[$m->ID]['children']    =   array();
+            }
+        }
+        $submenu = array();
+        foreach ($array_menu as $m) {
+            if ($m->menu_item_parent) {
+                $submenu[$m->ID] = array();
+                $submenu[$m->ID]['ID']       =   $m->ID;
+                $submenu[$m->ID]['title']    =   $m->title;
+                $submenu[$m->ID]['url']  =   $m->url;
+                $menu[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
+            }
+        }
+        return $menu;
+    }
 
     public static function get_breadcrumbs()
     {

@@ -26,7 +26,7 @@ use Searche\Classes\Theme;
             <?=Theme::get_theme_menu(
                 'main-menu',
                 true,
-                'main-menu align-self-flex-end overflow-auto bg-tertiary fullwidth pos-absolute bottom-0',
+                'mainmenu align-self-flex-end overflow-auto bg-tertiary fullwidth pos-absolute bottom-0',
                 'pull-left hover-bg-secondary transition',
                 'p-y-md p-l-md p-r-md d-inline-block pull-left color-white hover-tertiary transition'
             );?>

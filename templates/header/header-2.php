@@ -48,7 +48,7 @@ use Searche\Classes\Theme;
     </div>
     <div class="row">
         <?=Theme::get_theme_menu(
-            'main-menu',
+            'mainmenu',
             true,
             'main-menu align-self-flex-end overflow-auto bg-tertiary',
             'pull-left hover-bg-secondary transition',

@@ -3,9 +3,12 @@
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
 use Searche\Classes\Theme;
-use WebPConvert\WebPConvert;
 $theme = new Theme;
 
+/**
+ * Add the <title> tag in header
+ */
+add_theme_support( 'title-tag' );
 
 /**
  * Add theme menu
@@ -22,7 +25,6 @@ function add_menus()
     );
 }
 add_action( 'init', 'add_menus' );
-
 
 /**
  * Add footer widgets
@@ -81,7 +83,6 @@ function add_footer_widgets()
 }
 add_action( 'widgets_init', 'add_footer_widgets' );
 
-
 /**
  * Add Yoast sitemap if it exists
  */
@@ -90,7 +91,6 @@ function get_yoast_sitemap($linkClass = '')
     $sitemap = '<a class="'.$linkClass.'" href="'.get_site_url().'/sitemap.xml" target="_blank"/>Sitemap</a>';
     return (in_array('wordpress-seo/wp-seo.php', apply_filters('active_plugins', get_option('active_plugins')))) ? $sitemap : false;
 }
-
 
 /**
  * Disable emojis
@@ -109,7 +109,6 @@ function disable_emojis()
 }
 add_action( 'init', 'disable_emojis' );
 
-
 /**
  * Remove Gutenberg Block Library CSS from loading on the frontend
  */
@@ -121,12 +120,10 @@ function remove_wp_block_library_css()
 }
 add_action( 'wp_enqueue_scripts', 'remove_wp_block_library_css', 100 );
 
-
 /**
  * Use the classic editor in the backend
  */
 add_filter('use_block_editor_for_post', '__return_false', 10);
-
 
 /**
  * Remove Gutenberg widget area
@@ -137,20 +134,3 @@ function remove_gutenberg_widget_area()
 }
 add_action('after_setup_theme','remove_gutenberg_widget_area');
 add_filter('use_widgets_block_editor','__return_false');
-
-
-/**
- * On upload image add a webp version of that image.
- * This function will increase pagespeed.
- *
- * @param $attachment_id
- * @throws \WebPConvert\Convert\Exceptions\ConversionFailedException
- */
-function add_webp_image( $attachment_id )
-{
-    $source = get_attached_file($attachment_id);;
-    $destination = $source.'.webp';
-    $options = [];
-    WebPConvert::convert($source, $destination, $options);
-}
-add_action( 'add_attachment', 'add_webp_image' );

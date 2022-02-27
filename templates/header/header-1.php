@@ -22,7 +22,7 @@ use Searche\Classes\Theme;
                     </p>
                 </div>
                 <?=Theme::get_theme_menu(
-                        'extra-menu',
+                        'topmenu',
                         false,
                         'top-menu pull-right col-12-xs d-inline-block d-none-sm',
                         'p-sm d-inline-block pull-left',
@@ -54,7 +54,7 @@ use Searche\Classes\Theme;
             <span id="close-menu"><i class="fa fa-close h3 color-white"></i></span>
         </div>
         <?=Theme::get_theme_menu(
-            'main-menu',
+            'mainmenu',
             true,
             'align-self-flex-end overflow-auto bg-tertiary',
             'pull-left hover-bg-secondary transition',

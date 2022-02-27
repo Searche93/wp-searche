@@ -46,4 +46,5 @@ use Searche\Classes\ThemeColors;
 </head>
 
 <body class="body-bg-color">
+
 <?php wp_body_open(); ?>

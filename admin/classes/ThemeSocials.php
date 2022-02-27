@@ -5,7 +5,7 @@ namespace Searche\Classes;
 class ThemeSocials extends Theme
 {
 
-    public static $socialPlatforms = [
+    public static array $socialPlatforms = [
         'facebook',
         'instagram',
         'linkedin',
