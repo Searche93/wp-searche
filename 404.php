@@ -1,7 +1,7 @@
 <?php
 
-use Theme\Theme;
-use Theme\ThemeTemplates;
+use Searche\Classes\Theme;
+use Searche\Classes\ThemeTemplates;
 
 ?>
 <?php get_header(); ?>
