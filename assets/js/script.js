@@ -37,6 +37,25 @@ if(mainMenu) {
         window.addEventListener('resize',get_mobile_menu);
     });
 
+    function get_mobile_menu()
+    {
+        if (window.innerWidth <= 820) {
+            mainMenu.classList.add('mobile-menu');
+            openMenu.style.display = 'block';
+            closeMenu.style.display = 'none';
+            mainMenu.style.display = 'none';
+
+            toggleMenu.addEventListener('click', function() {
+                toggle_display(mainMenu);
+                toggle_display(openMenu);
+                toggle_display(closeMenu);
+            });
+        } else {
+            mainMenu.classList.remove('mobile-menu');
+            mainMenu.style.display = 'block';
+        }
+    }
+
     function add_listitem_classes()
     {
         let liWithChildren = mainMenu.getElementsByClassName('has-children');
