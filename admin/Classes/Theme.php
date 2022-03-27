@@ -142,6 +142,10 @@ class Theme
     public static function get_theme_menu(string $menuName, bool $wrapper = false, string $navClasses = '', string $listItemClasses = '', string $linkClasses = ''): string
     {
         $menu = self::build_menu($menuName);
+        if(!$menu) {
+            return self::return_error('Menu with name <strong>'.$menuName.'</strong> not found.');
+        }
+
         $menuList = '<nav id="menu-' . $menuName . '" class="menu '.$navClasses.'"><ul>';
         if($wrapper) {
             $menuList .= '<div class="wrapper">';
@@ -176,25 +180,29 @@ class Theme
     public static function build_menu(string $menuName): array
     {
         $array_menu = wp_get_nav_menu_items($menuName);
-        $menu = array();
-        foreach ($array_menu as $m) {
-            if (empty($m->menu_item_parent)) {
-                $menu[$m->ID] = array();
-                $menu[$m->ID]['ID']      =   $m->ID;
-                $menu[$m->ID]['title']       =   $m->title;
-                $menu[$m->ID]['url']         =   $m->url;
-                $menu[$m->ID]['children']    =   array();
+        if($array_menu){
+            $menu = array();
+            foreach ($array_menu as $m) {
+                if (empty($m->menu_item_parent)) {
+                    $menu[$m->ID] = array();
+                    $menu[$m->ID]['ID']      =   $m->ID;
+                    $menu[$m->ID]['title']       =   $m->title;
+                    $menu[$m->ID]['url']         =   $m->url;
+                    $menu[$m->ID]['children']    =   array();
+                }
             }
-        }
-        $submenu = array();
-        foreach ($array_menu as $m) {
-            if ($m->menu_item_parent) {
-                $submenu[$m->ID] = array();
-                $submenu[$m->ID]['ID']       =   $m->ID;
-                $submenu[$m->ID]['title']    =   $m->title;
-                $submenu[$m->ID]['url']  =   $m->url;
-                $menu[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
+            $submenu = array();
+            foreach ($array_menu as $m) {
+                if ($m->menu_item_parent) {
+                    $submenu[$m->ID] = array();
+                    $submenu[$m->ID]['ID']       =   $m->ID;
+                    $submenu[$m->ID]['title']    =   $m->title;
+                    $submenu[$m->ID]['url']  =   $m->url;
+                    $menu[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
+                }
             }
+        } else {
+            $menu = [];
         }
         return $menu;
     }
@@ -238,6 +246,17 @@ class Theme
         $phoneLink = str_replace(' ','', $phone);
         $mail = Theme::get_theme_option('theme_company_email');
         return '<p class="btns"><a class="btn mail" href="mailto:'.$mail.'">'.$mail.'</a> <a class="btn outline phone" href="tel:'.$phoneLink.'">'.$phone.'</a></p>';
+    }
+
+    /**
+     * Display a theme error
+     *
+     * @param string $msg
+     * @return string
+     */
+    public static function return_error(string $msg): string
+    {
+        return '<div class="d-inline-block p-md bg-light-grey"><i class="fa-solid fa-triangle-exclamation p-r-sm"></i> '.$msg.'</div>';
     }
 
 }
