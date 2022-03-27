@@ -23,7 +23,6 @@ img {max-width: 100%; height: auto;}
     -webkit-transition: background-color .3s linear;
     -moz-transition: background-color .3s linear;
     -o-transition: background-color .3s linear;
-    -ms-transition: background-color .3s linear;
     transition: background-color .3s linear;
 }
 
@@ -45,8 +44,8 @@ p {font-size: 1em; padding-bottom: 1em; line-height: 1.4em;}
 h2, h3, h4, h5, h6 {padding: .5em 0;}
 .fs-smaller{font-size: .5em;}
 .fs-small{font-size: .75em;}
-.bold {font-weight: bold;}
-.italic {font-style: italic;}
+strong, b, .bold {font-weight: bold;}
+i, .italic {font-style: italic;}
 
 /* Backgrounds and colors */
 .bg-white {background-color: #fff;}
@@ -160,24 +159,28 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
 .p-y-lg {padding: 1.5em 0;}
 .p-y-xl {padding: 3em 0;}
 
+.p-t-none {padding-top: 0;}
 .p-t-xs {padding-top: .25em;}
 .p-t-sm {padding-top: .5em;}
 .p-t-md {padding-top: 1em;}
 .p-t-lg {padding-top: 1.5em;}
 .p-t-xl {padding-top: 3em;}
 
+.p-r-none {padding-right: 0;}
 .p-r-xs {padding-right: .25em;}
 .p-r-sm {padding-right: .5em;}
 .p-r-md {padding-right: 1em;}
 .p-r-lg {padding-right: 1.5em;}
 .p-r-xl {padding-right: 3em;}
 
+.p-b-none {padding-bottom: 0;}
 .p-b-xs {padding-bottom: .25em;}
 .p-b-sm {padding-bottom: .5em;}
 .p-b-md {padding-bottom: 1em;}
 .p-b-lg {padding-bottom: 1.5em;}
 .p-b-xl {padding-bottom: 3em;}
 
+.p-l-none {padding-left: 0;}
 .p-l-xs {padding-left: .25em;}
 .p-l-sm {padding-left: .5em;}
 .p-l-md {padding-left: 1em;}
@@ -203,18 +206,21 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
 .m-y-lg {margin: 1.5em 0;}
 .m-y-xl {margin: 3em 0;}
 
+.m-t-none {margin-top: 0;}
 .m-t-xs {margin-top: .25em;}
 .m-t-sm {margin-top: .5em;}
 .m-t-md {margin-top: 1em;}
 .m-t-lg {margin-top: 1.5em;}
 .m-t-xl {margin-top: 3em;}
 
+.m-r-none {margin-right: 0;}
 .m-r-xs {margin-right: .25em;}
 .m-r-sm {margin-right: .5em;}
 .m-r-md {margin-right: 1em;}
 .m-r-lg {margin-right: 1.5em;}
 .m-r-xl {margin-right: 3em;}
 
+.m-b-none {margin-bottom: 0;}
 .m-b-xs {margin-bottom: .25em;}
 .m-b-sm {margin-bottom: .5em;}
 .m-b-md {margin-bottom: 1em;}
