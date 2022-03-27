@@ -37,8 +37,8 @@ use Searche\Classes\ThemeSocials;
             <div class="p-md">
                 <p class="p-x-md">
                     <span>&copy; Copyright <?=date('Y');?></span>
-                    <?php if(get_yoast_sitemap()) {
-                        echo '<span class="p-l-sm p-r-sm"> | </span> <span>'.get_yoast_sitemap('color-white').'</span>';
+                    <?php if(Theme::get_yoast_sitemap()) {
+                        echo '<span class="p-l-sm p-r-sm"> | </span> <span>'.Theme::get_yoast_sitemap('color-white').'</span>';
                     }?>
                 </p>
             </div>

@@ -196,6 +196,11 @@ class Theme
         return $menu;
     }
 
+    /**
+     * Get the yoast breadcrumb
+     *
+     * @return false|string
+     */
     public static function get_breadcrumbs()
     {
         if((function_exists('yoast_breadcrumb')) && (!is_home() && !is_front_page())) {
@@ -205,6 +210,19 @@ class Theme
             return $breadcrumb;
         }
         return false;
+    }
+
+
+    /**
+     * Add Yoast sitemap if it exists
+     *
+     * @param string $linkClass
+     * @return false|string
+     */
+    public static function get_yoast_sitemap(string $linkClass = '')
+    {
+        $sitemap = '<a class="'.$linkClass.'" href="'.get_site_url().'/sitemap.xml" target="_blank"/>Sitemap</a>';
+        return (in_array('wordpress-seo/wp-seo.php', apply_filters('active_plugins', get_option('active_plugins')))) ? $sitemap : false;
     }
 
 }

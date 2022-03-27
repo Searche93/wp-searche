@@ -83,14 +83,6 @@ function add_footer_widgets()
 }
 add_action( 'widgets_init', 'add_footer_widgets' );
 
-/**
- * Add Yoast sitemap if it exists
- */
-function get_yoast_sitemap($linkClass = '')
-{
-    $sitemap = '<a class="'.$linkClass.'" href="'.get_site_url().'/sitemap.xml" target="_blank"/>Sitemap</a>';
-    return (in_array('wordpress-seo/wp-seo.php', apply_filters('active_plugins', get_option('active_plugins')))) ? $sitemap : false;
-}
 
 /**
  * Disable emojis
