@@ -49,6 +49,8 @@ class Theme
         add_action('admin_enqueue_scripts', array($this, 'add_admin_style'));
         add_action('admin_enqueue_scripts', array($this, 'add_admin_scripts'));
 
+        add_shortcode( 'contact-buttons', array($this, 'contact_buttons'));
+
         ThemeImages::register();
     }
 
@@ -212,7 +214,6 @@ class Theme
         return false;
     }
 
-
     /**
      * Add Yoast sitemap if it exists
      *
@@ -223,6 +224,19 @@ class Theme
     {
         $sitemap = '<a class="'.$linkClass.'" href="'.get_site_url().'/sitemap.xml" target="_blank"/>Sitemap</a>';
         return (in_array('wordpress-seo/wp-seo.php', apply_filters('active_plugins', get_option('active_plugins')))) ? $sitemap : false;
+    }
+
+    /**
+     * Contact buttons
+     *
+     * @return string
+     */
+    function contact_buttons() : string
+    {
+        $phone = Theme::get_theme_option('theme_company_phone');
+        $phoneLink = str_replace(' ','', $phone);
+        $mail = Theme::get_theme_option('theme_company_email');
+        return '<p class="btns"><a class="btn mail" href="mailto:'.$mail.'">'.$mail.'</a> <a class="btn outline phone" href="tel:'.$phoneLink.'">'.$phone.'</a></p>';
     }
 
 }
