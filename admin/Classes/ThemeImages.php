@@ -13,6 +13,8 @@ class ThemeImages extends Theme
     public static function register()
     {
         add_action('add_attachment', array(static::class, 'add_webp_image'));
+
+        add_shortcode( 'img', array(static::class, 'get_webp_version'));
     }
 
     /**
@@ -41,8 +43,24 @@ class ThemeImages extends Theme
     {
         $imgExtension = '.' . pathinfo($imgSrc)['extension'];
         $webpImg = str_replace($imgExtension, '.webp', $imgSrc);
-        return getimagesize($webpImg) ? $webpImg : $imgSrc;
+        $file_headers = @get_headers($webpImg);
+        return ($file_headers[0] != 'HTTP/1.0 404 Not Found') ? $webpImg : $imgSrc;
     }
+
+
+    /**
+     * Shortcode option for:
+     * Check if an image exists in a webp format
+     *
+     * @param $src
+     * @return string
+     */
+    public static function get_webp_version($src): string
+    {
+        $imgLink = self::check_webp_availability($src['src']);
+        return '<img src="'.$imgLink.'">';
+    }
+
 
     /**
      * Change image size

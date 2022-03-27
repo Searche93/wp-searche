@@ -50,7 +50,7 @@ class ThemeSocials extends Theme
         $result .= '</div>';
         return $result;
     }
-    
+
     /**
      * Get whatsapp link
      *
