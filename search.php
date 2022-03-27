@@ -1,7 +1,7 @@
 <?php
 
-use Theme\Theme;
-use Theme\ThemeTemplates;
+use Searche\Classes\Theme;
+use Searche\Classes\ThemeTemplates;
 
 ?>
 <?php get_header(); ?>
@@ -18,10 +18,11 @@ use Theme\ThemeTemplates;
                     <h1 class="p-b-sm">Zoekresultaten</h1>
                     <div class="row">
                         <?php if(have_posts()) {
+                            $count = 0;
                             while(have_posts()) {
                                 the_post();
                                 ?>
-                                <div class="col-6">
+                                <div class="col-6 p-md <?=($count%2) ? 'p-r-none' : 'p-l-none';?>">
                                     <h3><?php the_title();?></h3>
                                     <p><?php the_excerpt();?></p>
                                     <p>
@@ -29,6 +30,8 @@ use Theme\ThemeTemplates;
                                            href="<?php the_permalink();?>">Lees meer</a>
                                     </p>
                                 </div>
+                                <?=($count%2) ? '<div class="clear"></div>' : '' ;?>
+                                <?php $count++;?>
                             <?php }
                         }?>
                     </div>
