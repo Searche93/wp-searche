@@ -32,6 +32,7 @@ class Theme
         'theme_no_sidebar',
         'theme_wrapper_width',
         // Social
+        'theme_whatsapp',
         'theme_facebook',
         'theme_instagram',
         'theme_linkedin',

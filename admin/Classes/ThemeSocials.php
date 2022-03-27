@@ -6,6 +6,7 @@ class ThemeSocials extends Theme
 {
 
     public static array $socialPlatforms = [
+        'whatsapp',
         'facebook',
         'instagram',
         'linkedin',
@@ -39,7 +40,13 @@ class ThemeSocials extends Theme
                 $icon = '<i class="fab fa-'.$social.' '.$iconClasses.'"></i>';
                 $optionResult = Theme::get_theme_option('theme_'.$social);
                 $url = (strpos($optionResult, 'http') === 0) ? $optionResult : 'https://'.$optionResult;
-                $result .= '<a class="social-icon '.$linkClasses.'" href="'.$url.'" target="_blank">'.$icon.'</a>';
+                if($social == 'whatsapp') {
+                    $result .= '<a class="social-icon '.$linkClasses.'" 
+                    href="https://wa.me/'.str_replace(' ','', $optionResult) .'" 
+                    target="_blank">'.$icon.'</a>';
+                } else {
+                    $result .= '<a class="social-icon '.$linkClasses.'" href="'.$url.'" target="_blank">'.$icon.'</a>';
+                }
             }
         }
         $result .= '</div>';

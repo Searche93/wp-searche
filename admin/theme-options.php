@@ -183,6 +183,10 @@ use Searche\Classes\ThemeColors;
                         <h2>Social</h2>
 
                         <div class="form-row">
+                            <label for="theme_whatsapp">Whatsapp</label>
+                            <input type="text" id="theme_whatsapp" name="theme_whatsapp" value="<?=ThemeTemplates::get_theme_option('theme_whatsapp');?>">
+                        </div>
+                        <div class="form-row">
                             <label for="theme_facebook">Facebook</label>
                             <input type="text" id="theme_facebook" name="theme_facebook" value="<?=ThemeTemplates::get_theme_option('theme_facebook');?>">
                         </div>
