@@ -13,7 +13,6 @@ class ThemeSocials extends Theme
         'pinterest',
     ];
 
-
     /**
      * Get social platforms
      *
@@ -23,7 +22,6 @@ class ThemeSocials extends Theme
     {
         return (array)self::$socialPlatforms;
     }
-
 
     /**
      * Return social icons and links
@@ -51,6 +49,16 @@ class ThemeSocials extends Theme
         }
         $result .= '</div>';
         return $result;
+    }
+    
+    /**
+     * Get whatsapp link
+     *
+     * @return string
+     */
+    public static function get_whatsapp_link(): string
+    {
+        return 'https://wa.me/'.str_replace(' ','', Theme::get_theme_option('theme_whatsapp'));
     }
 
 }
