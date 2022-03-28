@@ -9,6 +9,7 @@ class Theme
         // General
         'theme_logo',
         'theme_header_img',
+        'theme_favicon',
         'theme_company_name',
         'theme_company_address',
         'theme_company_zip',

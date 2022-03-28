@@ -3,6 +3,7 @@
 use Searche\Classes\ThemeTemplates;
 use Searche\Classes\ThemeColors;
 
+$favIconId = ThemeTemplates::get_theme_option('theme_favicon');
 
 ?>
 <!doctype html>
@@ -10,6 +11,9 @@ use Searche\Classes\ThemeColors;
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <?php if($favicon = wp_get_attachment_image_src($favIconId)) {
+        echo '<link title="Favicon" href="'.$favicon[0].'" rel="shortcut icon" />';
+    };?>
     <?php wp_head(); ?>
 
     <style>

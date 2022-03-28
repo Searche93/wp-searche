@@ -66,6 +66,26 @@ use Searche\Classes\ThemeColors;
                             <?php endif;?>
                         </div>
 
+                        <div class="form-row">
+                            <h3>Favicon</h3>
+                            <p>Recommended image size: 16px by 16px</p>
+                            <?php
+                            $favIconId = ThemeTemplates::get_theme_option('theme_favicon');
+                            if( $favicon = wp_get_attachment_image_src( $favIconId ) ):?>
+                                <div class="logo-box">
+                                    <a href="#" class="theme-favicon"><img src="<?=$favicon[0];?>" alt="favicon"/></a>
+                                    <a href="#" class="remove-favicon">Remove image</a>
+                                    <input type="hidden" name="theme_favicon" value="<?=$favIconId;?>">
+                                </div>
+                            <?php else :?>
+                                <div class="logo-box">
+                                    <a href="#" class="theme-favicon">Upload image</a>
+                                    <a href="#" class="remove-favicon" style="display:none">Remove image</a>
+                                    <input type="hidden" name="theme_favicon" value="<?=$favIconId;?>">
+                                </div>
+                            <?php endif;?>
+                        </div>
+
                         <div class="form-row m-t-md">
                             <h3>Header image</h3>
                             <?php

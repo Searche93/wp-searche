@@ -47,7 +47,6 @@ class ThemeImages extends Theme
         return ($file_headers[0] != 'HTTP/1.0 404 Not Found') ? $webpImg : $imgSrc;
     }
 
-
     /**
      * Shortcode option for:
      * Check if an image exists in a webp format
@@ -60,8 +59,7 @@ class ThemeImages extends Theme
         $imgLink = self::check_webp_availability($src['src']);
         return '<img src="'.$imgLink.'">';
     }
-
-
+    
     /**
      * Change image size
      *
