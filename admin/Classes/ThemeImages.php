@@ -48,16 +48,20 @@ class ThemeImages extends Theme
     }
 
     /**
-     * Shortcode option for:
+     * Shortcode function to:
      * Check if an image exists in a webp format
      *
-     * @param $src
+     * @param $attr
      * @return string
      */
-    public static function get_webp_version($src): string
+    public static function get_webp_version($attr): string
     {
-        $imgLink = self::check_webp_availability($src['src']);
-        return '<img src="'.$imgLink.'">';
+        $args = shortcode_atts( array(
+            'src' => '',
+            'alt' => 'Image of '.Theme::get_theme_option('theme_company_name'),
+        ), $attr );
+        $src = self::check_webp_availability($args['src']);
+        return '<img alt="'.$args['alt'].'" src="'.$src.'">';
     }
     
     /**
