@@ -18,15 +18,10 @@ use Searche\Classes\ThemeTemplates;
                 require_once(ThemeTemplates::get_theme_header());
             }?>
             <div class="content content-bg-color p-y-xl p-l-md p-r-md overflow-auto">
-                <main id="main" class="site-main <?=ThemeTemplates::get_content_position() . ' ' . ThemeTemplates::get_content_width();?>" role="main">
+                <main id="main" class="site-main col-12" role="main">
                     <h1 class="p-b-sm"><?=the_title();?></h1>
                     <?=the_content();?>
                 </main>
-                <?php if(!Theme::get_theme_option('theme_no_sidebar')):?>
-                    <aside class="col-3 col-12-sm <?=ThemeTemplates::get_sidebar_position();?>">
-                        <?php require_once (ThemeTemplates::get_theme_sidebar());?>
-                    </aside>
-                <?php endif;?>
             </div>
             <?php if(!Theme::get_theme_option('theme_footer_fullwidth')) {
                 require_once(ThemeTemplates::get_theme_footer());
