@@ -18,8 +18,12 @@ use Searche\Classes\ThemeTemplates;
                     <?=Theme::get_breadcrumbs();?>
                 </div>
                 <main id="main" class="site-main <?=ThemeTemplates::get_content_position() . ' ' . ThemeTemplates::get_content_width();?>" role="main">
-                    <h1 class="p-b-sm"><?=the_title();?></h1>
-                    <?=the_content();?>
+                    <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+                        <h1 class="p-b-sm"><?=the_title();?></h1>
+                        <?=the_content();?>
+                    <?php endwhile; else : ?>
+                        <p><?php esc_html_e( 'No post founds' ); ?></p>
+                    <?php endif; ?>
                 </main>
                 <?php if(!Theme::get_theme_option('theme_no_sidebar')):?>
                     <aside class="col-3 col-12-sm <?=ThemeTemplates::get_sidebar_position();?>">
