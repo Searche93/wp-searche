@@ -1,79 +1,21 @@
 /* Tabs */
-.tab-row {
-    display: block;
-    width: 100%;
-    overflow: auto;
-    margin-top: 20px;
-}
-.tab-list {
-    width: 20%;
-    float: left;
-    padding-right: 10px;
-    box-sizing: border-box;
-    margin-top: 0;
-}
-.tab-list li {
-    background-color: #fff;
-    padding: 10px;
-    box-sizing: border-box;
-    transition: 0.3s;
-}
-.tab-list li:hover {
-    background-color: #eaeaea;
-    transition: 0.3s;
-    cursor: pointer;
-}
-.tab-list li.active {
-    background-color: #2271b1;
-    color: #fff;
-}
+.tab-row {display: block; width: 100%; overflow: auto; margin-top: 20px;}
+.tab-list {width: 20%; float: left; padding-right: 10px; box-sizing: border-box; margin-top: 0;}
+.tab-list li {background-color: #fff; padding: 10px; box-sizing: border-box; transition: 0.3s;}
+.tab-list li:hover {background-color: #eaeaea; transition: 0.3s; cursor: pointer;}
+.tab-list li.active {background-color: #2271b1; color: #fff;}
 
-.tab-items {
-    width: 80%;
-    float: left;
-    padding-left: 10px;
-    box-sizing: border-box;
-    position: relative;
-}
-.tab-items .tab-content {
-    display: none;
-}
-.tab-items .tab-content.active {
-    display: block;
-
-    background-color: #fff;
-    box-sizing: border-box;
-    padding: 20px;
-}
-
+.tab-items {width: 80%; float: left; padding-left: 10px; box-sizing: border-box; position: relative;}
+.tab-items .tab-content {display: none;}
+.tab-items .tab-content.active {display: block; background-color: #fff; box-sizing: border-box; padding: 20px;}
 
 /* Form */
-label {
-    display: inline-block;
-    width: auto;
-    min-width: 155px;
-    font-weight: 500;
-}
-label:hover {
-    cursor: initial;
-}
-input,
-select,
-color {
-    min-width: 225px;
-}
-.form-row {
-    margin: 5px 0;
-}
-.logo-box {
-    max-width: 250px;
-    height: auto;
-}
-.logo-box * {
-    max-width: 100%;
-}
-
-
+label {display: inline-block; width: auto; min-width: 155px; font-weight: 500;}
+label:hover {cursor: initial;}
+input, select, color {min-width: 225px;}
+.form-row {margin: 5px 0;}
+.logo-box {max-width: 250px;height: auto;}
+.logo-box * {max-width: 100%;}
 
 /* Floats */
 .pull-right{float: right;}
