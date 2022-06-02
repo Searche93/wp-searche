@@ -18,9 +18,8 @@ class ThemeSocials extends Theme
      *
      * @return array
      */
-    public static function get_social_platforms(): array
-    {
-        return (array)self::$socialPlatforms;
+    public static function get_social_platforms(): array {
+        return self::$socialPlatforms;
     }
 
     /**
@@ -30,14 +29,13 @@ class ThemeSocials extends Theme
      * @param string $linkClasses
      * @return string
      */
-    public static function get_theme_socials(string $iconClasses = '', string $linkClasses = ''): string
-    {
+    public static function get_theme_socials(string $iconClasses = '', string $linkClasses = ''): string {
         $result = '<div class="social-icons">';
         foreach (self::get_social_platforms() as $social) {
             if(Theme::get_theme_option('theme_'.$social)) {
                 $icon = '<i class="fab fa-'.$social.' '.$iconClasses.'"></i>';
                 $optionResult = Theme::get_theme_option('theme_'.$social);
-                $url = (strpos($optionResult, 'http') === 0) ? $optionResult : 'https://'.$optionResult;
+                $url = (str_starts_with($optionResult, 'http')) ? $optionResult : 'https://'.$optionResult;
                 if($social == 'whatsapp') {
                     $result .= '<a class="social-icon '.$linkClasses.'" 
                     href="https://wa.me/'.str_replace(' ','', $optionResult) .'" 
@@ -56,8 +54,7 @@ class ThemeSocials extends Theme
      *
      * @return string
      */
-    public static function get_whatsapp_link(): string
-    {
+    public static function get_whatsapp_link(): string {
         return 'https://wa.me/'.str_replace(' ','', Theme::get_theme_option('theme_whatsapp'));
     }
 

@@ -43,8 +43,7 @@ class Theme
     /**
      * Theme constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         add_action('admin_init', array($this, 'create_update_theme_settings'));
         add_action('admin_menu', array($this, 'theme_options_menu'));
 
@@ -61,16 +60,14 @@ class Theme
      *
      * @return array
      */
-    public function get_theme_settings(): array
-    {
-        return (array)$this->themeSettings;
+    public function get_theme_settings(): array {
+        return $this->themeSettings;
     }
 
     /**
      * Create update theme settings
      */
-    public function create_update_theme_settings()
-    {
+    public function create_update_theme_settings() {
         foreach ($this->get_theme_settings() as $themeSetting) {
             register_setting( 'theme-settings-group', $themeSetting );
         }
@@ -79,16 +76,14 @@ class Theme
     /**
      * Add admin style css
      */
-    public function add_admin_style()
-    {
+    public function add_admin_style() {
         wp_enqueue_style('admin-styles', get_template_directory_uri().'/admin/css/admin.css');
     }
 
     /**
      * Add admin script js
      */
-    public function add_admin_scripts()
-    {
+    public function add_admin_scripts() {
         if ( ! did_action( 'wp_enqueue_media' ) ) {
             wp_enqueue_media();
         }
@@ -98,8 +93,7 @@ class Theme
     /**
      * Add theme options menu item
      */
-    public function theme_options_menu()
-    {
+    public function theme_options_menu() {
         add_menu_page(
             __( 'Theme options', 'wp-searche' ),
             __( 'Theme options', 'wp-searche' ),
@@ -114,8 +108,7 @@ class Theme
     /**
      * Add options page
      */
-    public function theme_options_page()
-    {
+    public function theme_options_page() {
         include(get_template_directory() . '/admin/theme-options.php');
     }
 
@@ -125,8 +118,7 @@ class Theme
      * @param string $option
      * @return string|void
      */
-    public static function get_theme_option(string $option)
-    {
+    public static function get_theme_option(string $option) {
         return esc_attr(get_option($option));
     }
 
@@ -140,8 +132,7 @@ class Theme
      * @param string $linkClasses
      * @return string
      */
-    public static function get_theme_menu(string $menuName, bool $wrapper = false, string $navClasses = '', string $listItemClasses = '', string $linkClasses = ''): string
-    {
+    public static function get_theme_menu(string $menuName, bool $wrapper = false, string $navClasses = '', string $listItemClasses = '', string $linkClasses = ''): string {
         $menu = self::build_menu($menuName);
         if(!$menu) {
             return self::return_error('Menu with name <strong>'.$menuName.'</strong> not found.');
@@ -178,8 +169,7 @@ class Theme
      * @param string $menuName
      * @return array
      */
-    public static function build_menu(string $menuName): array
-    {
+    public static function build_menu(string $menuName): array {
         $array_menu = wp_get_nav_menu_items($menuName);
         if($array_menu){
             $menu = array();
@@ -213,8 +203,7 @@ class Theme
      *
      * @return false|string
      */
-    public static function get_breadcrumbs()
-    {
+    public static function get_breadcrumbs() {
         if((function_exists('yoast_breadcrumb')) && (!is_home() && !is_front_page())) {
             $breadcrumb = '<div id="breadcrumbs">';
             $breadcrumb .= yoast_breadcrumb( '<p>','</p>' );
@@ -230,8 +219,7 @@ class Theme
      * @param string $linkClass
      * @return false|string
      */
-    public static function get_yoast_sitemap(string $linkClass = '')
-    {
+    public static function get_yoast_sitemap(string $linkClass = '') {
         $sitemap = '<a class="'.$linkClass.'" href="'.get_site_url().'/sitemap.xml" target="_blank"/>Sitemap</a>';
         return (in_array('wordpress-seo/wp-seo.php', apply_filters('active_plugins', get_option('active_plugins')))) ? $sitemap : false;
     }
@@ -241,8 +229,7 @@ class Theme
      *
      * @return string
      */
-    function contact_buttons() : string
-    {
+    function contact_buttons() : string {
         $phone = Theme::get_theme_option('theme_company_phone');
         $phoneLink = str_replace(' ','', $phone);
         $mail = Theme::get_theme_option('theme_company_email');
@@ -255,8 +242,7 @@ class Theme
      * @param string $msg
      * @return string
      */
-    public static function return_error(string $msg): string
-    {
+    public static function return_error(string $msg): string {
         return '<div class="d-inline-block p-md bg-light-grey"><i class="fa-solid fa-triangle-exclamation p-r-sm"></i> '.$msg.'</div>';
     }
 
