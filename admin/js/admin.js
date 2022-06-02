@@ -9,11 +9,9 @@ jQuery(function($){
         $('#tab-'+id).addClass('active');
     });
 
-
     /**
      * Upload a logo
      */
-    //$('body').on( 'click', '.theme-logo', function(e){
     $('.theme-logo, .theme-header-img, .theme-favicon').on( 'click',function(e){
         e.preventDefault();
         let button = $(this),
@@ -35,7 +33,6 @@ jQuery(function($){
     /**
      * Remove logo
      */
-    //$('body').on('click', '.remove-logo', function(e){
     $('.remove-logo, .remove-theme-header-img, .remove-favicon').on('click',function(e){
         e.preventDefault();
         let button = $(this);
@@ -43,5 +40,4 @@ jQuery(function($){
         button.next().val('');
         button.hide().prev().html('Upload image');
     });
-
 });
