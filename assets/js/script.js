@@ -1,101 +1,77 @@
-// TODO
-// Refactor this complete file
-
-let iPadScreenSize = 820;
-let smoothScroll = document.getElementById('smooth-jump');
+const isMobile = window.matchMedia("only screen and (max-width: 820px)").matches;
 
 /**
  * Functions to run if document is loaded
  */
-window.onload = function() {
-    let slider = document.getElementById('slider');
+window.onload = () => {
     if(slider) {
         responsive_slider();
     }
-    if(window.innerWidth <= iPadScreenSize) {
-        add_listitem_classes();
-        hide_submenus();
-        open_submenu();
-    }
     if(smoothScroll) {
         jump_to();
+    }
+    if(mainMenu && isMobile) {
+        mobile_menu();
     }
 }
 
 /**
  *  Responsive main menu
  */
-let mainMenu = document.getElementById('menu-main-menu');
-let toggleMenu = document.getElementById('toggle-menu');
-let openMenu = document.getElementById('open-menu');
-let closeMenu = document.getElementById('close-menu');
-
-if(mainMenu) {
-    // Onload Document
-    document.addEventListener("DOMContentLoaded", function(){
-        get_mobile_menu();
-        window.addEventListener('resize',get_mobile_menu);
+const mainMenu = document.getElementById('menu-mainmenu');
+const toggleMenu = document.getElementById('toggle-menu');
+const openMenu = document.getElementById('open-menu');
+const closeMenu = document.getElementById('close-menu');
+const listItemsWithChildren = mainMenu.getElementsByClassName('has-children');
+const mobile_menu = () => {
+    init_mobile_menu();
+    li_with_child_icon();
+    toggle_mobile_menu();
+    toggle_childmenu();
+}
+const init_mobile_menu = () => {
+    mainMenu.classList.add('mobile-menu');
+    mainMenu.style.display = 'none';
+    openMenu.style.display = 'block';
+    closeMenu.style.display = 'none';
+}
+const toggle_mobile_menu = () => {
+    toggleMenu.querySelectorAll('span').forEach((item) => {
+        item.addEventListener('click', () => {
+            toggle_display(mainMenu);
+            toggle_display(openMenu);
+            toggle_display(closeMenu);
+        });
     });
-
-    function get_mobile_menu()
-    {
-        if (window.innerWidth <= 820) {
-            mainMenu.classList.add('mobile-menu');
-            openMenu.style.display = 'block';
-            closeMenu.style.display = 'none';
-            mainMenu.style.display = 'none';
-
-            toggleMenu.addEventListener('click', function() {
-                toggle_display(mainMenu);
-                toggle_display(openMenu);
-                toggle_display(closeMenu);
+}
+const li_with_child_icon = () => {
+    if(listItemsWithChildren) {
+        Array.from(listItemsWithChildren).forEach(listItem => {
+            listItem.insertAdjacentHTML('afterbegin', '<i class="open-submenu fa fa-plus">&nbsp;</i>');
+        });
+    }
+}
+const toggle_childmenu = () => {
+    if(listItemsWithChildren) {
+        Array.from(listItemsWithChildren).forEach(listItem => {
+            listItem.addEventListener('click', () => {
+                let nearestSubmenu = listItem.querySelector('.submenu');
+                toggle_display(nearestSubmenu);
             });
-        } else {
-            mainMenu.classList.remove('mobile-menu');
-            mainMenu.style.display = 'block';
-        }
-    }
-
-    function add_listitem_classes()
-    {
-        let liWithChildren = mainMenu.getElementsByClassName('has-children');
-        let html = '<span class="open-submenu"><i class="fa fa-plus"></i></span>';
-        for(let i=0; i < liWithChildren.length; i++){
-            liWithChildren[i].insertAdjacentHTML('beforeend', html);
-        }
-    }
-    function hide_submenus()
-    {
-        let submenus = document.getElementsByClassName('submenu');
-        for(let i=0; i < submenus.length; i++){
-            submenus[i].style.display = 'none';
-        }
-    }
-    function open_submenu()
-    {
-        let parent = document.getElementsByClassName('has-children');
-        for(let i=0; i < parent.length; i++){
-            let current = parent[i].querySelector('.open-submenu');
-            current.addEventListener('click', function() {
-                let submenu = parent[i].querySelector('.submenu');
-                toggle_display(submenu);
-            });
-        }
+        });
     }
 }
 
 /**
  * Search form
  */
-let searchForm = document.getElementById('search-form');
-let searchButton = document.getElementById('search-button');
-
+const searchForm = document.getElementById('search-form');
+const searchButton = document.getElementById('search-button');
 if(searchForm) {
     searchForm.addEventListener('keyup', enable_search_button);
     searchButton.disabled = true;
 
-    function enable_search_button()
-    {
+    function enable_search_button() {
         let searchFormValue = this.value;
         let countSearchFormValue = searchFormValue.length;
         document.getElementById('search-button').disabled = countSearchFormValue === 0;
@@ -106,8 +82,7 @@ if(searchForm) {
  * Toggle display
  * @param el
  */
-function toggle_display(el)
-{
+const toggle_display = (el) => {
     if(el.style.display === 'none') {
         el.style.display = 'block';
     } else {
@@ -118,26 +93,26 @@ function toggle_display(el)
 /**
  * Slider
  */
-let responsive_slider = function()
-{
-    let slider = document.getElementById('slider');
+const slider = document.getElementById('slider');
+const responsive_slider = () => {
+    const slider = document.getElementById('slider');
     let sliderWidth = slider.offsetWidth;
-    let slideList = document.getElementById('slideWrap');
+    const slideList = document.getElementById('slideWrap');
     let count = 1;
     let items = slideList.querySelectorAll('div').length;
-    let prev = document.getElementById('prev');
-    let next = document.getElementById('next');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
 
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', () => {
         sliderWidth = slider.offsetWidth;
     });
 
-    let listItem = slideList.querySelectorAll('div');
+    const listItem = slideList.querySelectorAll('div');
     for(let i=0; i < listItem.length; i++){
         listItem[i].style.width = sliderWidth + 'px';
     }
 
-    let prevSlide = function() {
+    const prevSlide = () => {
         if(count > 1) {
             count = count - 2;
             slideList.style.left = '-' + count * sliderWidth + 'px';
@@ -150,7 +125,7 @@ let responsive_slider = function()
         }
     };
 
-    let nextSlide = function() {
+    const nextSlide = () => {
         if(count < items) {
             slideList.style.left = '-' + count * sliderWidth + 'px';
             count++;
@@ -161,15 +136,15 @@ let responsive_slider = function()
         }
     };
 
-    next.addEventListener('click', function() {
+    next.addEventListener('click', () => {
         nextSlide();
     });
 
-    prev.addEventListener('click', function() {
+    prev.addEventListener('click', () => {
         prevSlide();
     });
 
-    setInterval(function() {
+    setInterval(() => {
         nextSlide()
     }, 8000);
 };
@@ -177,10 +152,10 @@ let responsive_slider = function()
 /**
  * Jump to a given ID
  */
-let jump_to = function()
-{
-    let jumpTo = smoothScroll.getAttribute('data-jump-to');
-    smoothScroll.addEventListener('click', function() {
+const smoothScroll = document.getElementById('smooth-jump');
+const jump_to = () => {
+    const jumpTo = smoothScroll.getAttribute('data-jump-to');
+    smoothScroll.addEventListener('click', () => {
         let url = location.href;
         location.href = '#'+jumpTo;
         history.replaceState(null,null,url);

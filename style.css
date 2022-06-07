@@ -305,35 +305,23 @@ div[class*='col-'] {float: left; box-sizing: border-box;}
 
 
 /* Menu */
-nav.menu ul li.has-children {
+#menu-mainmenu ul li.has-children {
     position: relative;
 }
-nav.menu ul li.has-children ul.submenu {
+#menu-mainmenu ul li.has-children ul.submenu {
     display: none;
     position: absolute;
-    top: 3em;
-    left: 1em;
+    left: 0;
+    top: 2em;
+    background-color: var(--header-bg-color);
+    width: 150px;
+    padding-top: .5em;
 }
-nav.menu ul li.has-children:hover > ul.submenu {
-    display: block;
-}
+#menu-mainmenu ul li.has-children ul.submenu li {padding: .5em;width: 100%;}
+#menu-mainmenu ul li.has-children ul.submenu li a {color: var(--extra-color);font-size: .75em;}
+#menu-mainmenu ul li.has-children:hover > ul.submenu {display: block;}
 
 /* Responsive */
-@media screen and (min-width: 820px) {
-    /* Submenu */
-    nav.menu ul li.has-children:hover > ul.submenu {
-        display: block;
-    }
-    nav.menu ul li.has-children:hover > ul.submenu li {
-        padding: .75em;
-    }
-    nav.menu ul li.has-children:hover > ul.submenu li a {
-        color: #fff;
-    }
-    nav.menu ul li.has-children:hover > ul.submenu li a:hover {
-        color: #525252;
-    }
-}
 /* iPad landscape */
 @media screen and (max-width: 1024px) {
     /* Columns */
@@ -371,6 +359,25 @@ nav.menu ul li.has-children:hover > ul.submenu {
 
 /* iPad portrait */
 @media screen and (max-width: 820px) {
+    /* Mobile menu */
+    #menu-mainmenu.mobile-menu ul li {
+        width: 100%;
+        float: none;
+        display: block;
+    }
+    #menu-mainmenu.mobile-menu ul li.has-children .open-submenu {
+        position: absolute;
+        right: 0;
+        top: 0.5em;
+        color: var(--extra-color);
+    }
+    #menu-mainmenu.mobile-menu ul li.has-children ul.submenu {
+        width: auto;
+        left: initial;
+        top: initial;
+        position: relative;
+    }
+
     /* Columns */
     .col-1-sm{width: 8.33%;}
     .col-2-sm{width: 16.66%;}
@@ -422,20 +429,6 @@ nav.menu ul li.has-children:hover > ul.submenu {
     .m-r-md-sm {margin-right: 1em;}
     .m-reset-sm {margin: 0;}
 
-
-    /* Mobile menu */
-    .mobile-menu {
-        position: absolute;
-        left: 0;
-        top: 0;
-        min-height: 100vh;
-        width: 60%;
-        z-index: 9;
-    }
-    .mobile-menu li {
-        float: none !important;
-        overflow: auto;
-    }
 }
 
 /* Mobile */
