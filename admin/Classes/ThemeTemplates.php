@@ -129,7 +129,7 @@ class ThemeTemplates extends Theme
         return array_filter(
             $files,
             function($value) use ($folder){
-                return preg_match('/' . $folder . '/i', $value);
+                return preg_match('/' . $folder . '/', $value);
             }
         );
     }
